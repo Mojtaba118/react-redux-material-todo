@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {connect} from 'react-redux';
+import Grid from '@material-ui/core/Grid';
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
+import background from "./images/background.jpg";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+
+function App(props) {
+    console.log(props.todos)
+    return (<>
+        <img src={background} className="background"/>
+        <div className="container">
+            <div className="todos">
+                <TodoForm todos={props.todos}/>
+                <hr/>
+                <Grid container justify="center">
+                    <TodoList todos={props.todos}/>
+                </Grid>
+            </div>
+        </div>
+    </>);
 }
 
-export default App;
+const mapStateToProps=(state)=>{
+    return state;
+};
+
+export default connect(mapStateToProps,undefined)(App);
